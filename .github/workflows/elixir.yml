@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: elixir:1.9.1-slim
+      image: utahkt/amazoniap-test
 
     steps:
     - uses: actions/checkout@master
@@ -17,5 +17,7 @@ jobs:
         mix local.rebar --force
         mix local.hex --force
         mix deps.get
+    - name: Start up tomcat
+      run: /usr/local/tomcat/bin/startup.sh
     - name: Run Tests
       run: mix test
